@@ -43,13 +43,20 @@
             // put more per-instance properties here
         UNITY_INSTANCING_BUFFER_END(Props)
 
-		
+		float PosBelow(float3 posUV, float3 posMax){
+            return 
+        }
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * lerp(_Color1,_Color2, _ColorLerpCoef);
-            o.Albedo = c.rgb;
+
+            float y = lerp(0,10,0.1);
+
+            float isColorChanging = 0;
+            isColorChanging = 1-step(IN.worldPos.y, y);
+            o.Albedo = c.rgb * isColorChanging;
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;

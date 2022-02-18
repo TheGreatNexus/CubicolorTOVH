@@ -9,7 +9,8 @@ public class LevelSelectorUI :MonoBehaviour
 {
 	[SerializeField] ToggleGroup m_LevelSelectorToggleGroup;
 	[SerializeField] string m_LevelToggleFormatString;
-
+	[SerializeField] GridLayoutGroup m_LevelGridLayoutGroup;
+	[SerializeField] GameObject m_LevelTilePrefab;
 	void SetLevelParameters()
 	{
 		SetCurrentLevel(LevelsManager.Instance.CurrentLevelIndex);
@@ -37,6 +38,7 @@ public class LevelSelectorUI :MonoBehaviour
 	private void OnEnable()
 	{
 		if (!LevelsManager.Instance) return;
+		GenerateLevelsUI();
 		SetLevelParameters();
 	}
 
@@ -48,4 +50,21 @@ public class LevelSelectorUI :MonoBehaviour
 				EventManager.Instance.Raise(new SelectedLevelIndexHasChangedEvent() {eSelectedLevelIndex = int.Parse(activeToggle.name)-1 });
 		}
 	}
+
+	public void GenerateLevelsUI()
+    {
+        foreach (Transform child in transform)
+        {
+			GameObject.Destroy(child.gameObject);
+        }
+        for (int i = 0; i < LevelsManager.Instance.LevelsCount; i++)
+        {
+			Toggle toggle = Instantiate(m_LevelTilePrefab, transform).GetComponent<Toggle>();
+			int j = i + 1;
+			toggle.name = j.ToString();
+			toggle.GetComponentInChildren<Text>().text = "Level " + j;
+			toggle.group = m_LevelSelectorToggleGroup;
+			toggle.onValueChanged.AddListener(SelectedLevelHasChanged);
+		}
+    }
 }
