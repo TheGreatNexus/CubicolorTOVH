@@ -11,13 +11,15 @@ public class Cube : SingletonGameStateObserver<Cube>
     [SerializeField] Color m_Color1;
     [SerializeField] Color m_Color2;
     [SerializeField] float m_ColorLerpCoef;
-
+    [SerializeField] float m_EvolveColorCoefMin;
+    [SerializeField] float m_EvolveColorCoefMax;
     [SerializeField] protected Color[] m_Colors;
 
+    int m_GoingUpOrDown;
     Vector3 m_Direction;
     bool m_IsMoving = false;
     Transform m_Transform;
-
+    [SerializeField] float m_EvolveColor;
     Level m_CurrentLevel;
 
     float m_TimeAcceptInputs;
@@ -42,19 +44,22 @@ public class Cube : SingletonGameStateObserver<Cube>
         EventManager.Instance.RemoveListener<GoToNextLevelEvent>(GoToNextLevel);
     }
 
-    void SetCubeColor(COLOR color)
+    void SetCubeColor(COLOR color,int upOrDown)
     {
+        m_GoingUpOrDown = upOrDown;
+        m_CubeMaterial.SetInt("_GoingUpOrDown", m_GoingUpOrDown);
         StartCoroutine(ChangeColorCoroutine(m_Color, color, .5f));
     }
 
     void ResetCubeColor()
     {
-        SetCubeColor(COLOR.black);
+        m_GoingUpOrDown = 0;
+        SetCubeColor(COLOR.black,0);
     }
 
     void InColorTileHasBeenReached(InColorTileHasBeenReachedEvent e)
     {
-        SetCubeColor(e.eColor);
+        SetCubeColor(e.eColor,1);
     }
     void OutColorTileHasBeenReached(OutColorTileHasBeenReachedEvent e)
     {
@@ -215,7 +220,8 @@ public class Cube : SingletonGameStateObserver<Cube>
         m_Color1 = m_Colors[(int)startColor];
         m_Color2 = m_Colors[(int)endColor];
         m_ColorLerpCoef = 0;
-
+        m_EvolveColor = 0.7f;
+        StartCoroutine(ColorEvolve());
         yield return new WaitForEndOfFrame();
 
         float elapsedTime = 0;
@@ -244,6 +250,52 @@ public class Cube : SingletonGameStateObserver<Cube>
         };
 
         return allAngles.Aggregate((l, r) => l.Value < r.Value ? l : r).Key;
+
+    }
+
+    IEnumerator ColorEvolve()
+    {
+        if (m_GoingUpOrDown == 1)
+        {
+            m_EvolveColor = -0.5f;
+            while (m_EvolveColor <= 0.7)
+            {
+                m_EvolveColor += Random.Range(m_EvolveColorCoefMin, m_EvolveColorCoefMax);
+
+                //float test = Mathf.Sin(Time.time) * Time.deltaTime + m_EvolveColor;
+                m_CubeMaterial.SetFloat("_EvolveColor", m_EvolveColor);
+
+                yield return null;
+            }
+            if (m_EvolveColor > 0.7)
+            {
+                m_EvolveColor = 0.7f;
+                m_CubeMaterial.SetFloat("_EvolveColor", m_EvolveColor);
+
+            }
+        }
+        else
+        {
+            m_EvolveColor = 0.7f;
+            while (m_EvolveColor >= -0.5)
+            {
+                m_EvolveColor -= Random.Range(m_EvolveColorCoefMin, m_EvolveColorCoefMax);
+
+                //float test = Mathf.Sin(Time.time) * Time.deltaTime + m_EvolveColor;
+                m_CubeMaterial.SetFloat("_EvolveColor", m_EvolveColor);
+
+                yield return null;
+            }
+            if (m_EvolveColor < -0.5)
+            {
+                m_EvolveColor = -0.5f;
+                m_CubeMaterial.SetFloat("_EvolveColor", m_EvolveColor);
+
+            }
+        }
+
+
+
 
     }
 }
