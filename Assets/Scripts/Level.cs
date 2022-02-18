@@ -27,6 +27,7 @@ public class Level : MonoBehaviour,IEventHandler{
 	private void Awake()
 	{
 		SubscribeEvents();
+		EventManager.Instance.Raise(new GameStatisticsChangedEvent(){eLevelName = "Level " + gameObject.name.Substring(gameObject.name.Length-9,2)});
 	}
 	private void OnDestroy()
 	{
@@ -60,7 +61,6 @@ public class Level : MonoBehaviour,IEventHandler{
 					m_ExitTile = exitTileGO.GetComponent<ExitTile>();
 					exitTileGO.transform.position = WorldTilePosition(x, y) + Vector3.up* m_ExitTile.Height;
 					exitTileGO.transform.SetParent(transform);
-					m_ExitTile.AppearTile();
 					m_Tiles.Add(m_ExitTile);
 					//Debug.Log(y + " - " + x + " - " + "EXIT TILE");
 				}
@@ -101,6 +101,7 @@ public class Level : MonoBehaviour,IEventHandler{
 			colorTile.Color = tile.Color;
 			colorTileGO.transform.position = m_ExitTile.transform.position;
 			m_ExitTile.transform.position += Vector3.up * colorTile.Height;
+			colorTile.AppearTile();
 			m_ExitColorTiles.Add(colorTile);
 			m_Tiles.Add(colorTile);
 		}
