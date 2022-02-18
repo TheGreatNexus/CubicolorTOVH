@@ -52,7 +52,7 @@ public class Level : MonoBehaviour,IEventHandler{
 				{
 					m_CubeSpawnPosition = WorldTilePosition(x,y)- TileOffsetPos;
 					m_Tiles.Add(Instantiate(m_TileSet.NeutralTilePrefab, WorldTilePosition(x, y), Quaternion.identity, this.transform).GetComponent<Tile>());
-					Debug.Log(y + " - " + x + " - " + "CUBE");
+					//Debug.Log(y + " - " + x + " - " + "CUBE");
 				}
 				else if(m_TileColors.IsExitTileColor(color))
 				{
@@ -60,29 +60,35 @@ public class Level : MonoBehaviour,IEventHandler{
 					m_ExitTile = exitTileGO.GetComponent<ExitTile>();
 					exitTileGO.transform.position = WorldTilePosition(x, y) + Vector3.up* m_ExitTile.Height;
 					exitTileGO.transform.SetParent(transform);
+					m_ExitTile.AppearTile();
 					m_Tiles.Add(m_ExitTile);
-					Debug.Log(y + " - " + x + " - " + "EXIT TILE");
+					//Debug.Log(y + " - " + x + " - " + "EXIT TILE");
 				}
 				else if(m_TileColors.IsNeutralTileColor(color))
 				{
-					m_Tiles.Add(Instantiate(m_TileSet.NeutralTilePrefab, WorldTilePosition(x, y), Quaternion.identity, this.transform).GetComponent<Tile>());
-					Debug.Log(y + " - " + x + " - " + "NEUTRAL TILE");
+					GameObject m_NeutraTileGO = Instantiate(m_TileSet.NeutralTilePrefab,WorldTilePosition(x, y), Quaternion.identity, this.transform);
+					m_NeutraTileGO.GetComponent<Tile>().AppearTile();
+					m_Tiles.Add(m_NeutraTileGO.GetComponent<Tile>());
+
+					//Debug.Log(y + " - " + x + " - " + "NEUTRAL TILE");
 				}
 				else if (m_TileColors.IsInTileColor(color,out logInColor))
 				{
 					InColorTile inColorTile =  Instantiate(m_TileSet.InColorTilePrefab, WorldTilePosition(x, y), Quaternion.identity, this.transform).GetComponent<InColorTile>();
 					inColorTile.Color = logInColor;
+					inColorTile.AppearTile();
 					m_Tiles.Add(inColorTile);
-					Debug.Log(y + " - " + x + " - " + logInColor +" IN TILE");
+					//Debug.Log(y + " - " + x + " - " + logInColor +" IN TILE");
 				}
 				else if (m_TileColors.IsOutTileColor(color, out logOutColor))
 				{
 					OutColorTile outColorTile = Instantiate(m_TileSet.OutColorTilePrefab, WorldTilePosition(x, y), Quaternion.identity, this.transform).GetComponent<OutColorTile>();
 					outColorTile.Color = logOutColor;
+					outColorTile.AppearTile();
 					m_Tiles.Add(outColorTile);
-					Debug.Log(y + " - " + x + " - " + logOutColor + " OUT TILE");
+					//Debug.Log(y + " - " + x + " - " + logOutColor + " OUT TILE");
 				}
-				else Debug.Log(y + " - " + x + " - " +"ERROR");
+				//else Debug.Log(y + " - " + x + " - " +"ERROR");
 			}
 		}
 
