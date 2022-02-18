@@ -24,10 +24,7 @@ public class GameVictoryEvent : SDD.Events.Event
 }
 public class GameStatisticsChangedEvent : SDD.Events.Event
 {
-	public int eBestScore { get; set; }
-	public int eScore { get; set; }
-	public int eNLives { get; set; }
-	public int eNEnemiesLeftBeforeVictory { get; set; }
+	public string eLevelName { get; set; }
 }
 #endregion
 

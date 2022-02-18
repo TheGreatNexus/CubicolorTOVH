@@ -15,6 +15,7 @@ public class MenuManager : Manager<MenuManager> {
 	[SerializeField] GameObject m_PanelNextLevel;
 	[SerializeField] GameObject m_PanelVictory;
 	[SerializeField] GameObject m_PanelGameOver;
+	[SerializeField] GameObject m_PanelHUD;
 
 	List<GameObject> m_AllPanels;
 	#endregion
@@ -71,6 +72,7 @@ public class MenuManager : Manager<MenuManager> {
 		m_AllPanels.Add(m_PanelNextLevel);
 		m_AllPanels.Add(m_PanelVictory);
 		m_AllPanels.Add(m_PanelGameOver);
+		m_AllPanels.Add(m_PanelHUD);
 	}
 
 	void OpenPanel(GameObject panel)
@@ -135,7 +137,7 @@ public class MenuManager : Manager<MenuManager> {
 
 	protected override void GamePlay(GamePlayEvent e)
 	{
-		OpenPanel(null);
+		OpenPanel(m_PanelHUD);
 	}
 
 	protected override void GamePause(GamePauseEvent e)

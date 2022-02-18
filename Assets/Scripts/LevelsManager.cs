@@ -101,6 +101,7 @@ public class LevelsManager : Manager<LevelsManager> {
 	void SelectedLevelIndexHasChanged(SelectedLevelIndexHasChangedEvent e)
 	{
 		m_CurrentLevelIndex = e.eSelectedLevelIndex;
+		EventManager.Instance.Raise(new GameStatisticsChangedEvent(){eLevelName = "Level "+ m_CurrentLevelIndex});
 	}
 	#endregion
 }
