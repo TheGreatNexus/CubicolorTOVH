@@ -2024,8 +2024,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8610646901215239670, guid: 64787091058a8324c860fbe13c1aa465,
         type: 3}
+      propertyPath: m_EvolveColor
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610646901215239670, guid: 64787091058a8324c860fbe13c1aa465,
+        type: 3}
       propertyPath: m_CameraTransform
       value: 
       objectReference: {fileID: 1747815045}
+    - target: {fileID: 8610646901215239670, guid: 64787091058a8324c860fbe13c1aa465,
+        type: 3}
+      propertyPath: m_EvolveColorCoef
+      value: 0.007
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610646901215239670, guid: 64787091058a8324c860fbe13c1aa465,
+        type: 3}
+      propertyPath: m_EvolveColorCoefMax
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610646901215239670, guid: 64787091058a8324c860fbe13c1aa465,
+        type: 3}
+      propertyPath: m_EvolveColorCoefMin
+      value: 0.002
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64787091058a8324c860fbe13c1aa465, type: 3}

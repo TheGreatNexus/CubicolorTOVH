@@ -35,6 +35,8 @@
 		fixed4 _Color2;
 		float _ColorLerpCoef;
 		float4 _CubeWorldPosition;
+        float _EvolveColor;
+        int _GoingUpOrDown;
 
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
         // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -43,20 +45,27 @@
             // put more per-instance properties here
         UNITY_INSTANCING_BUFFER_END(Props)
 
-		float PosBelow(float3 posUV, float3 posMax){
-            return 
-        }
+		//float PosBelow(float3 posUV, float3 posMax){
+  //          return 
+  //      }
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * lerp(_Color1,_Color2, _ColorLerpCoef);
 
-            float y = lerp(0,10,0.1);
+            float isColorChangingUp = 0;
+            float isColorChangingDown = 0;
 
-            float isColorChanging = 0;
-            isColorChanging = 1-step(IN.worldPos.y, y);
-            o.Albedo = c.rgb * isColorChanging;
+            isColorChangingUp = step(IN.worldPos.y, _EvolveColor);
+            //isColorChangingDown = step(_EvolveColor, IN.worldPos.y);
+            
+            //int multiplierUp = step(0.1, _GoingUpOrDown);
+            //int multiplierDown = step(_GoingUpOrDown,0.1);
+
+            //int test = (isColorChangingUp * _GoingUpOrDown) + (isColorChangingDown * 1 - _GoingUpOrDown);
+
+            o.Albedo = c.rgb * isColorChangingUp ;//isColorChangingUp;
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
