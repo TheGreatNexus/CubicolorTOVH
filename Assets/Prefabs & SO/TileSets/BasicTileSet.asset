@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd8ffcf12023cdb498534d978f41cd12, type: 3}
+  m_Name: BasicTileSet
+  m_EditorClassIdentifier: 
+  m_NeutralTilePrefab: {fileID: 4801095170747615109, guid: 88503e347cac49243800c6d3ee88184a,
+    type: 3}
+  m_InColorTilePrefab: {fileID: 39, guid: 2cf61a63f142ed34397a8920a873d111, type: 3}
+  m_OutColorTilePrefab: {fileID: 41, guid: 97e922816ae6a164caa9ff7d4263b831, type: 3}
+  m_ColorTilePrefab: {fileID: 40, guid: 2feb1871e2df6e44c80fa5bf660401e2, type: 3}
+  m_ExitTilePrefab: {fileID: 4801095170747615109, guid: e7a024b27d4bbf546b46ce36804c21ac,
+    type: 3}

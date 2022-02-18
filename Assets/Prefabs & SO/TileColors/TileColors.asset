@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b6bfc471acb488439cc19c59b4f7094, type: 3}
+  m_Name: TileColors
+  m_EditorClassIdentifier: 
+  m_CubeTileColor: {r: 0, g: 0, b: 0, a: 1}
+  m_NeutralTileColor: {r: 1, g: 1, b: 1, a: 1}
+  m_ExitTileColor: {r: 0.49803925, g: 0.49803925, b: 0.49803925, a: 1}
+  m_InTileColors:
+  - {r: 0.93725497, g: 0.8941177, b: 0.6901961, a: 1}
+  - {r: 1, g: 0.68235296, b: 0.78823537, a: 1}
+  - {r: 0.70980394, g: 0.90196085, b: 0.1137255, a: 1}
+  - {r: 0.6, g: 0.85098046, b: 0.9176471, a: 1}
+  m_OutTileColors:
+  - {r: 1, g: 0.9490197, b: 0, a: 1}
+  - {r: 0.9294118, g: 0.10980393, b: 0.14117648, a: 1}
+  - {r: 0.13333334, g: 0.69411767, b: 0.29803923, a: 1}
+  - {r: 0, g: 0.63529414, b: 0.909804, a: 1}
