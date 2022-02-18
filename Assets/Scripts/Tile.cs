@@ -38,7 +38,7 @@ public class Tile : MonoBehaviour
 	}
 	public void AppearTile()
 	{
-		float duration = 1+0.1f*Vector3.Distance(transform.position,new Vector3(4,-.5f,-4));
+		float duration = 1-0.1f*Vector3.Distance(transform.position,new Vector3(4,-.5f,-4));
 		StartCoroutine(FadeInMove(duration));
 	}
 
