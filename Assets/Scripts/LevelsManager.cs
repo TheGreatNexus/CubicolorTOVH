@@ -13,6 +13,10 @@ public class LevelsManager : Manager<LevelsManager> {
 	int m_CurrentLevelIndex { get { return PlayerPrefs.GetInt("CURRENT_LEVEL_INDEX", 0); } set { PlayerPrefs.SetInt("CURRENT_LEVEL_INDEX", value); } }
 	public int CurrentLevelIndex{get { return m_CurrentLevelIndex; }}
 
+	//int m_LengthLevelsPrefabs { get { return m_LevelsPrefabs.Length; }}
+
+	public int LevelsCount { get { return m_LevelsPrefabs.Length; } }
+
 	int m_BestLevelIndex { get { return PlayerPrefs.GetInt("MAX_LEVEL_INDEX", 0); } set { PlayerPrefs.SetInt("MAX_LEVEL_INDEX", Mathf.Clamp(Mathf.Max(m_BestLevelIndex,value),0,m_LevelsPrefabs.Length-1)); } }
 	public int BestLevelIndex { get { return m_BestLevelIndex; } }
 
