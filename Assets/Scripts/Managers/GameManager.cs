@@ -90,7 +90,7 @@ public class GameManager : Manager<GameManager> {
 	{
 		SetTimeScale(0);
 		m_GameState = GameState.gameInstantiateLevel;
-		EventManager.Instance.Raise(new GoToNextLevelEvent());
+		EventManager.Instance.Raise(new AskToGoToNextLevelEvent());
 	}
 	#endregion
 
