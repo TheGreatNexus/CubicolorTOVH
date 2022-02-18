@@ -36,6 +36,11 @@ public class Tile : MonoBehaviour
 	{
 		StartCoroutine(FadeOutMoveAndDestroyCoroutine(duration, move?.5f:0));
 	}
+	public void AppearTile()
+	{
+		float duration = 1-0.1f*Vector3.Distance(transform.position,new Vector3(4,-.5f,-4));
+		StartCoroutine(FadeInMove(duration));
+	}
 
 	void ChangeMaterialsAlpha(float alpha)
 	{
@@ -59,6 +64,22 @@ public class Tile : MonoBehaviour
 		}
 
 		Destroy(gameObject);
+	}
+
+	IEnumerator FadeInMove(float duration)
+	{
+		float elapsedTime = 0;
+		Vector3 startPos = m_Transform.position - Vector3.up;
+		Vector3 endPos = startPos + Vector3.up;
+
+		while (elapsedTime<duration)
+		{
+			elapsedTime += Time.deltaTime;
+			float k = elapsedTime / duration;
+			ChangeMaterialsAlpha(k);
+			m_Transform.position = Vector3.Lerp(startPos, endPos, k);
+			yield return null;
+		}
 	}
 
 	IEnumerator TranslateCoroutine(float duration, Vector3 vect)
